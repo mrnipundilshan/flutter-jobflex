@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+import 'package:jobflex/widget/constants.dart';
+
+class AppliedScreen extends StatelessWidget {
+  const AppliedScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: JPrimaryColor, // Dark blue background
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Applied',
+              style: TextStyle(fontSize: 32, color: Colors.white),
+            ),
+            const SizedBox(height: 20),
+            const Icon(
+              Icons.check_circle_outline,
+              size: 250,
+              color: Colors.white,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

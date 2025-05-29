@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "11696162749",
+    "project_id": "job-flex-8bd98",
+    "storage_bucket": "job-flex-8bd98.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:11696162749:android:081d7b29a89238544a34d4",
+        "android_client_info": {
+          "package_name": "com.example.jobflex"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaLYdctH5Lr-vxN6YG_nfK94xssnOCBtI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

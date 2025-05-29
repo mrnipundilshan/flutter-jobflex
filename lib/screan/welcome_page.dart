@@ -1,0 +1,55 @@
+import 'package:flutter/material.dart';
+
+class WelcomePage extends StatelessWidget {
+  const WelcomePage({super.key});
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          // Blue container with image
+          Container(
+            decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 35, 58, 102),
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(60),
+                bottomLeft: Radius.circular(60),
+              ),
+            ),
+            height: 735,
+            width: double.infinity,
+            child: Center(
+              child: Image.asset(
+                'Assets/jobflex.png',
+                width: 280,
+                height: 280,
+              ),
+            ),
+          ),
+
+          // White space area
+          Expanded(
+            child: Container(
+              width: double.infinity,
+              color: Colors.white,
+              child: Stack(
+                children: [
+                  // Navigation arrow
+                  Positioned(
+                    bottom: 40,
+                    right: 30,
+                    child: Icon(
+                      Icons.arrow_forward,
+                      color: Colors.black45,
+                      size: 36,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}

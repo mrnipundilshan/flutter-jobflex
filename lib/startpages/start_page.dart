@@ -1,0 +1,186 @@
+import 'package:flutter/material.dart';
+import 'package:jobflex/screan/Choice.dart';
+import 'package:jobflex/startpages/loging.dart';
+import 'package:jobflex/startpages/sign_up.dart';
+
+class StartPage extends StatelessWidget {
+  const StartPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: const Color(0xFF243A66), // Dark blue background
+      body: Column(
+        children: [
+          // Top white container with illustration
+          Container(
+            decoration: const BoxDecoration(
+              color: Color(0xFFF2F5F9), // Light background color
+              borderRadius: BorderRadius.only(
+                bottomRight: Radius.circular(30),
+                bottomLeft: Radius.circular(30),
+              ),
+            ),
+            height: MediaQuery.of(context).size.height * 0.5,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // "Let's get started" text
+                  const Text(
+                    "Let's get started",
+                    style: TextStyle(
+                      fontSize: 32,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF243A66),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  // Rocket illustration
+                  Image.asset(
+                    'Assets/startpage.png',
+                    width: 280,
+                    height: 280,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        width: 280,
+                        height: 280,
+                        color: Colors.grey.shade200,
+                        child: const Center(child: Text("Rocket Illustration")),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          ),
+
+          // Spacer
+          const Spacer(),
+
+          // Logo in the center of the blue area
+          Image.asset(
+            'Assets/jobflex.png',
+            width: 270,
+            height: 270,
+            errorBuilder: (context, error, stackTrace) {
+              return Container(
+                width: 180,
+                height: 180,
+                color: Colors.transparent,
+                child: const Center(
+                  child: Text(
+                    "Jobflex",
+                    style: TextStyle(
+                      fontSize: 40,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+
+          // Spacer
+          const Spacer(),
+
+          // Sign up button
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: SizedBox(
+              width: double.infinity,
+              height: 55,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Handle sign up button click
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Sign up button clicked!'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                      builder: (BuildContext context) => ChoiceScreen(),
+                    ),
+                  );
+
+                  // Navigate to sign up page
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(builder: (context) => SignUpPage()),
+                  // );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  foregroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  elevation: 3,
+                ),
+                child: const Text(
+                  "Sign up",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                ),
+              ),
+            ),
+          ),
+
+          // Already have an account text and login link
+          Padding(
+            padding: const EdgeInsets.only(top: 20.0, bottom: 40.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  "Already have an account?",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // Handle log in button click
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Log in button clicked!'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+
+                    // Navigate to login page
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(builder: (context) => LoginPage()),
+                    // );
+                  },
+                  child: const Text(
+                    "Log in",
+                    style: TextStyle(
+                      color: Color(0xFFFF5253), // Reddish color for "Log in"
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Usage example:
+// void main() {
+//   runApp(MaterialApp(
+//     home: StartPage(),
+//     theme: ThemeData(fontFamily: 'Your-Font-Family'), // Replace with your font
+//     debugShowCheckedModeBanner: false,
+//   ));
+// }
