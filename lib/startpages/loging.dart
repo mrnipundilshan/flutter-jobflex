@@ -219,7 +219,7 @@ class _LogingScreenState extends State<LogingScreen> {
               ),
               title: Text(
                 "ACCOUNT STATUS",
-                style: TextStyle(color: Colors.amber, fontSize: 22),
+                style: TextStyle(color: Colors.black, fontSize: 22),
               ),
               content: Text(
                 "LOGGING SUCCESSFUL",

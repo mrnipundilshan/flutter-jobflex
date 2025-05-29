@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:jobflex/payment/payment.dart';
 import 'package:jobflex/screan/Choice.dart';
+import 'package:jobflex/screan/home.dart';
 import 'package:jobflex/startpages/loging.dart';
 
 void main() async {
@@ -60,6 +61,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LogingScreen(),
         '/signup': (context) => ChoiceScreen(),
         '/payment': (context) => PaymentScreen(),
+        '/userhome': (context) => HomePage(),
       },
     );
   }

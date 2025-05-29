@@ -89,6 +89,7 @@ class _NotificationPageState extends State<NotificationPage> {
               ),
               child: Column(
                 children: [
+                  SizedBox(height: 50),
                   Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 20,
@@ -102,7 +103,7 @@ class _NotificationPageState extends State<NotificationPage> {
                             color: Color(0xFF233A66),
                           ),
                           onPressed: () {
-                            Navigator.of(context).pop();
+                            Navigator.pushNamed(context, '/userhome');
                           },
                         ),
                         const Expanded(

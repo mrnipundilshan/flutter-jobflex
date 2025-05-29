@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:jobflex/auth/auth.dart';
 import 'package:jobflex/models/setting.dart';
 import 'package:jobflex/widget/footer.dart';
 import 'package:jobflex/widget/setting_tile.dart';
@@ -60,7 +61,8 @@ class More extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Handle sign out logic here
+                    AuthService().signOut();
+                    Navigator.pushReplacementNamed(context, '/login');
                   },
                   style: ElevatedButton.styleFrom(
                     foregroundColor: const Color(0xFF233A66),

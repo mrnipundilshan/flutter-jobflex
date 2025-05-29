@@ -137,12 +137,20 @@ class _SignUpPageState extends State<SignUpPage> {
                         const SizedBox(height: 24),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Text(
-                              "Already have an account? ",
-                              style: TextStyle(
-                                color: Colors.black54,
-                                fontSize: 14,
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  '/login',
+                                );
+                              },
+                              child: Text(
+                                "Already have an account? ",
+                                style: TextStyle(
+                                  color: Colors.black54,
+                                  fontSize: 14,
+                                ),
                               ),
                             ),
                             Text(

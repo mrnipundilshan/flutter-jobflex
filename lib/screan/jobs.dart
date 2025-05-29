@@ -25,7 +25,7 @@ class _JobsScreenState extends State<JobsScreen> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/userhome');
           },
         ),
       ),
