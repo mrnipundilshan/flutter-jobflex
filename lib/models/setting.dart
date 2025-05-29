@@ -24,11 +24,15 @@ final List<Setting> settings = [
     route: "/invitefriend",
     icon: CupertinoIcons.person_add_solid,
   ),
-  Setting(title: "About us", route: "/", icon: CupertinoIcons.info_circle_fill),
+  Setting(
+    title: "About us",
+    route: "/aboutus",
+    icon: CupertinoIcons.info_circle_fill,
+  ),
   Setting(
     title: "Help Center",
     route: "/helpcenter",
     icon: CupertinoIcons.question_circle_fill,
   ),
-  Setting(title: "Privacy", route: "/", icon: CupertinoIcons.lock_fill),
+  Setting(title: "Privacy", route: "/privacy", icon: CupertinoIcons.lock_fill),
 ];

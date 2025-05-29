@@ -1,8 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:jobflex/footer_pages/user_more.dart';
 import 'package:jobflex/payment/payment.dart';
 import 'package:jobflex/screan/Choice.dart';
 import 'package:jobflex/screan/home.dart';
+import 'package:jobflex/screan/loading_page.dart';
+import 'package:jobflex/screan/user_applied_jobs.dart';
+import 'package:jobflex/screan/welcome_page.dart';
 import 'package:jobflex/startpages/loging.dart';
 
 void main() async {
@@ -56,12 +60,16 @@ class MyApp extends StatelessWidget {
         //'/promoadmin': (context) => const PromoAdmin(),
   }*/
       debugShowCheckedModeBanner: false,
-      home: LogingScreen(), // Set ChoiceScreen as the initial page
+      home: LoadingPage(
+        nextPage: WelcomePage(),
+      ), // Set ChoiceScreen as the initial page
       routes: {
         '/login': (context) => LogingScreen(),
         '/signup': (context) => ChoiceScreen(),
         '/payment': (context) => PaymentScreen(),
         '/userhome': (context) => HomePage(),
+        '/more': (context) => More(),
+        '/userappliedjobs': (context) => UserAppliedJobs(),
       },
     );
   }

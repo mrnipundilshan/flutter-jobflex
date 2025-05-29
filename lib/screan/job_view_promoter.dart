@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:jobflex/screan/home.dart';
+import 'package:jobflex/screan/promotor_home.dart';
 import 'package:jobflex/widget/constants.dart';
 import 'package:jobflex/widget/promoter_footer.dart';
 import 'categories.dart'; // Import the categories.dart file
@@ -39,7 +41,10 @@ class _JobViewPromoterState extends State<JobViewPromoter> {
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => HomePage()),
+            );
           },
         ),
         actions: [

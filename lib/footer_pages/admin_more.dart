@@ -2,14 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:jobflex/auth/auth.dart';
 import 'package:jobflex/models/setting.dart';
 import 'package:jobflex/widget/footer.dart';
+import 'package:jobflex/widget/promoter_footer.dart';
 import 'package:jobflex/widget/setting_tile.dart';
 import 'package:jobflex/profile/promotor_profile.dart'; // Import the PromotorProfile page
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class More extends StatelessWidget {
-  const More({super.key});
+class AdminMore extends StatefulWidget {
+  const AdminMore({super.key});
 
+  @override
+  State<AdminMore> createState() => _AdminMoreState();
+}
+
+class _AdminMoreState extends State<AdminMore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,7 +80,7 @@ class More extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const Footer(),
+      bottomNavigationBar: const PromoterFooter(),
     );
   }
 }

@@ -52,9 +52,7 @@ class About extends StatelessWidget {
                             ),
                           ),
                           // Empty SizedBox for alignment
-                          SizedBox(
-                            width: 48,
-                          ),
+                          SizedBox(width: 48),
                         ],
                       ),
                     ),
@@ -112,19 +110,9 @@ class About extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(
-            icon,
-            color: Colors.white,
-            size: 24,
-          ),
+          Icon(icon, color: Colors.white, size: 24),
           SizedBox(width: 12),
-          Text(
-            text,
-            style: TextStyle(
-              fontSize: 18,
-              color: Colors.white,
-            ),
-          ),
+          Text(text, style: TextStyle(fontSize: 18, color: Colors.white)),
         ],
       ),
     );

@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:jobflex/screan/user_applied_jobs.dart';
 import 'package:jobflex/widget/constants.dart';
 import 'package:jobflex/widget/footer.dart';
-import 'categories.dart'; // Import the categories.dart file
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UserCatagoriedJob extends StatefulWidget {
   final String jobcatagory;
@@ -20,29 +21,22 @@ class _UserCatagoriedJobState extends State<UserCatagoriedJob> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Jobs',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        title: const Text('Jobs'),
         backgroundColor: const Color.fromARGB(255, 255, 255, 255),
         centerTitle: true,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context);
+            Navigator.pushNamed(context, '/userhome');
           },
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert),
+            icon: const Icon(Icons.check_box, size: 30),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => CategoriesScreen()),
+                MaterialPageRoute(builder: (context) => UserAppliedJobs()),
               );
             },
           ),
@@ -84,6 +78,7 @@ class _UserCatagoriedJobState extends State<UserCatagoriedJob> {
                 email: data['email'] ?? '',
                 imageUrl:
                     'https://cdn3.careeraddict.com/uploads/article/58649/illustration-hotel-reception.jpg',
+                jobId: doc.id,
               );
             },
           );
@@ -94,7 +89,7 @@ class _UserCatagoriedJobState extends State<UserCatagoriedJob> {
   }
 }
 
-class JobCard extends StatelessWidget {
+class JobCard extends StatefulWidget {
   final String jobTitle;
   final String company;
   final String location;
@@ -103,6 +98,7 @@ class JobCard extends StatelessWidget {
   final String payment;
   final String email;
   final String imageUrl;
+  final String jobId;
 
   const JobCard({
     Key? key,
@@ -114,18 +110,89 @@ class JobCard extends StatelessWidget {
     required this.payment,
     required this.email,
     required this.imageUrl,
+    required this.jobId,
   }) : super(key: key);
+
+  @override
+  State<JobCard> createState() => _JobCardState();
+}
+
+class _JobCardState extends State<JobCard> {
+  bool _hasApplied = false;
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkApplicationStatus();
+  }
+
+  Future<void> _checkApplicationStatus() async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user != null) {
+        final appliedJobs =
+            await FirebaseFirestore.instance
+                .collection('applied_jobs')
+                .where('jobId', isEqualTo: widget.jobId)
+                .where('userEmail', isEqualTo: user.email)
+                .get();
+
+        setState(() {
+          _hasApplied = appliedJobs.docs.isNotEmpty;
+          _isLoading = false;
+        });
+      } else {
+        setState(() {
+          _isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
+  Future<void> _applyForJob(BuildContext context) async {
+    try {
+      final user = FirebaseAuth.instance.currentUser;
+      if (user == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Please login to apply for jobs')),
+        );
+        return;
+      }
+
+      // Save application
+      await FirebaseFirestore.instance.collection('applied_jobs').add({
+        'jobId': widget.jobId,
+        'userEmail': user.email,
+        'jobTitle': widget.jobTitle,
+        'company': widget.company,
+        'appliedAt': FieldValue.serverTimestamp(),
+        'status': 'pending',
+      });
+
+      setState(() {
+        _hasApplied = true;
+      });
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Application submitted successfully!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Error applying for job: $e')));
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      color: const Color.fromARGB(
-        255,
-        210,
-        226,
-        255,
-      ), // Set the card color to light blue
+      color: const Color.fromARGB(255, 210, 226, 255),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       elevation: 3,
       child: Padding(
@@ -139,10 +206,10 @@ class JobCard extends StatelessWidget {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    shape: BoxShape.circle, // Make the image circular
+                    shape: BoxShape.circle,
                     image: DecorationImage(
                       fit: BoxFit.cover,
-                      image: NetworkImage(imageUrl),
+                      image: NetworkImage(widget.imageUrl),
                     ),
                   ),
                 ),
@@ -152,51 +219,44 @@ class JobCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        jobTitle,
+                        widget.jobTitle,
                         style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Text('Company: $company'),
-                      Text('Location: $location'),
+                      Text('Company: ${widget.company}'),
+                      Text('Location: ${widget.location}'),
                     ],
                   ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            Text('Working Day: $workingDay'),
-            Text('Time: $time'),
-            Text('Payment: $payment'),
-            Text('email: $email'),
+            Text('Working Day: ${widget.workingDay}'),
+            Text('Time: ${widget.time}'),
+            Text('Payment: ${widget.payment}'),
+            Text('email: ${widget.email}'),
             const SizedBox(height: 12),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: JPrimaryColor,
-                    foregroundColor: JPrimaryLightColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
+                if (_isLoading)
+                  const CircularProgressIndicator()
+                else
+                  ElevatedButton(
+                    onPressed: _hasApplied ? null : () => _applyForJob(context),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor:
+                          _hasApplied ? Colors.grey : JPrimaryColor,
+                      foregroundColor: JPrimaryLightColor,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
                     ),
+                    child: Text(_hasApplied ? 'Applied' : 'Apply'),
                   ),
-                  child: const Text('Apply'),
-                ),
                 const SizedBox(width: 8),
-                OutlinedButton(
-                  onPressed: () {},
-                  style: OutlinedButton.styleFrom(
-                    backgroundColor: JPrimaryColor,
-                    foregroundColor: JPrimaryLightColor,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  child: const Text('Save'),
-                ),
               ],
             ),
           ],

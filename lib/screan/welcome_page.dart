@@ -19,11 +19,7 @@ class WelcomePage extends StatelessWidget {
             height: 735,
             width: double.infinity,
             child: Center(
-              child: Image.asset(
-                'Assets/jobflex.png',
-                width: 280,
-                height: 280,
-              ),
+              child: Image.asset('img/Logopng.png', width: 280, height: 280),
             ),
           ),
 
@@ -38,10 +34,15 @@ class WelcomePage extends StatelessWidget {
                   Positioned(
                     bottom: 40,
                     right: 30,
-                    child: Icon(
-                      Icons.arrow_forward,
-                      color: Colors.black45,
-                      size: 36,
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushReplacementNamed(context, '/login');
+                      },
+                      child: Icon(
+                        Icons.arrow_forward,
+                        color: Colors.black45,
+                        size: 36,
+                      ),
                     ),
                   ),
                 ],

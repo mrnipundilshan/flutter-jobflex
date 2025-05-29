@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:jobflex/widget/footer.dart';
 import 'package:jobflex/chat/new_chat.dart';
 import 'package:jobflex/chat/chat_search.dart';
+import 'package:jobflex/widget/promoter_footer.dart';
 
 class Chat extends StatelessWidget {
   const Chat({super.key});
@@ -194,7 +195,7 @@ class ChatUI extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: const Footer(),
+      bottomNavigationBar: PromoterFooter(),
     );
   }
 }

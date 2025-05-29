@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:jobflex/widget/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:jobflex/footer_pages/user_more.dart';
 
 class InviteFriend extends StatelessWidget {
   const InviteFriend({super.key});
@@ -55,12 +55,26 @@ class _InviteFriendScreenState extends State<InviteFriendScreen> {
             right: screenWidth * 0.1,
             child: Column(
               children: [
-                const Row(
+                Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Icon(Icons.arrow_back, color: Color(0xFF2B3A67)),
-                    SizedBox(width: 65),
-                    Text(
+                    IconButton(
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Color(0xFF233A66),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<void>(
+                            builder: (BuildContext context) => More(),
+                          ),
+                        );
+                      },
+                    ),
+
+                    const SizedBox(width: 65),
+                    const Text(
                       "Invite Friend",
                       style: TextStyle(
                         fontSize: 20,

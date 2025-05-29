@@ -4,7 +4,7 @@ import 'package:jobflex/footer_pages/notification_page.dart';
 import 'package:jobflex/screan/home.dart'; // Import the Home page
 import 'package:jobflex/screan/loading_page.dart';
 import 'package:jobflex/supportive_pages/help_center.dart'; // Import the Help Center page
-import 'package:jobflex/footer_pages/more.dart';
+import 'package:jobflex/footer_pages/user_more.dart';
 import 'package:jobflex/screan/jobs.dart';
 
 class Footer extends StatefulWidget {

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:jobflex/chat/chat.dart'; // Import the Chat page
+import 'package:jobflex/footer_pages/admin_more.dart';
 import 'package:jobflex/screan/home.dart'; // Import the Home page
 import 'package:jobflex/screan/job_view_promoter.dart';
 import 'package:jobflex/screan/loading_page.dart';
 import 'package:jobflex/screan/promotor_home.dart';
 import 'package:jobflex/supportive_pages/help_center.dart'; // Import the Help Center page
-import 'package:jobflex/footer_pages/more.dart';
+import 'package:jobflex/footer_pages/user_more.dart';
 
 class PromoterFooter extends StatefulWidget {
   const PromoterFooter({Key? key}) : super(key: key);
@@ -55,7 +56,9 @@ class _PromoterFooterState extends State<PromoterFooter> {
     } else if (index == 4) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => LoadingPage(nextPage: More())),
+        MaterialPageRoute(
+          builder: (context) => LoadingPage(nextPage: AdminMore()),
+        ),
       );
     }
   }

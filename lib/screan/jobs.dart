@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:jobflex/screan/user_applied_jobs.dart';
 import 'package:jobflex/widget/constants.dart';
 import 'package:jobflex/widget/footer.dart';
-import 'categories.dart'; // Import the categories.dart file
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -28,6 +28,17 @@ class _JobsScreenState extends State<JobsScreen> {
             Navigator.pushNamed(context, '/userhome');
           },
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.check_box, size: 30),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => UserAppliedJobs()),
+              );
+            },
+          ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream:
